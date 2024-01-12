@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<unistd.h>
+void Handlejob(int jid)
+{
+        printf("Process <%d>/<%d> has acccepted the job with id %d\n",getpid(),getppid(),jid);
+        printf("Process <%d>/<%d> has finished the job with id %d\n",getpid(),getppid(),jid);
+}
+int main(void )
+{
+        pid_t child;
+        child=fork();
+        if(child==0)
+        {
+        Handlejob(4);
+        }
+        else
+        Handlejob(7);
+}
+
+
+             
+cdac@CDACLAB-125:~/Concurrency$ cc forkasync.c -o forkasync
+cdac@CDACLAB-125:~/Concurrency$ ./forkasync
+Process <103>/<10> has acccepted the job with id 7
+Process <103>/<10> has finished the job with id 7
+Process <104>/<103> has acccepted the job with id 4
+Process <104>/<103> has finished the job with id 4                                                                                                                            ~                           
